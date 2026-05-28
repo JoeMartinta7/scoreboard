@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FCC Scoreboard">
+<title>Fresh Coat Cypress — Daily Scoreboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --surface2: #1c1c1c;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.14);
+  --text: #f0f0f0;
+  --muted: #888;
+  --green: #22c55e;
+  --green-dim: rgba(34,197,94,0.12);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.12);
+  --amber: #f59e0b;
+  --amber-dim: rgba(245,158,11,0.12);
+  --accent: #22c55e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+body { padding: 0 0 80px; }
+
+.top-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 20px 12px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logo { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--muted); letter-spacing: .04em; }
+.streak-pill {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--amber-dim); border: 1px solid rgba(245,158,11,0.25);
+  border-radius: 20px; padding: 4px 10px;
+  font-size: 12px; font-weight: 500; color: var(--amber);
+  font-family: 'DM Mono', monospace;
+}
+
+.tabs {
+  display: flex; gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+}
+.tab {
+  flex: 1; padding: 12px 0; text-align: center;
+  font-size: 13px; font-weight: 500; color: var(--muted);
+  border-bottom: 2px solid transparent;
+  cursor: pointer; transition: all .15s;
+  background: none; border-top: none; border-left: none; border-right: none;
+}
+.tab.active { color: var(--text); border-bottom-color: var(--accent); }
+
+.panel { display: none; padding: 20px; }
+.panel.active { display: block; }
+
+.section-label {
+  font-size: 10px; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
+}
+
+.win-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  transition: border-color .3s;
+}
+.win-card.won { border-color: rgba(34,197,94,0.4); background: rgba(34,197,94,0.06); }
+.win-title { font-size: 24px; font-weight: 600; margin-bottom: 4px; line-height: 1.2; }
+.win-sub { font-size: 13px; color: var(--muted); }
+
+.tasks { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.task {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 16px;
+  cursor: pointer; transition: all .15s; user-select: none;
+}
+.task:active { transform: scale(0.98); }
+.task.done { background: var(--green-dim); border-color: rgba(34,197,94,0.25); }
+.task.done .task-text { text-decoration: line-through; color: var(--muted); }
+.check {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1.5px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all .2s; font-size: 13px;
+}
+.task.done .check { background: var(--green); border-color: var(--green); }
+.task-text { font-size: 15px; line-height: 1.4; }
+
+.day-strip { display: flex; gap: 6px; margin-bottom: 24px; align-items: center; }
+.day-pip {
+  flex: 1; height: 6px; border-radius: 3px;
+  background: var(--surface2);
+  transition: background .3s;
+}
+.day-pip.won { background: var(--green); }
+.day-pip.lost { background: var(--red); opacity: 0.5; }
+.day-pip.today { background: var(--amber); opacity: 0.6; }
+
+.quote-card {
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+}
+.quote-text { font-size: 14px; line-height: 1.6; color: var(--muted); font-style: italic; }
+.quote-text strong { color: var(--text); font-style: normal; }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+.metric-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px;
+}
+.metric-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+.metric-val { font-size: 22px; font-weight: 600; font-family: 'DM Mono', monospace; }
+.metric-pct { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.metric-delta { font-size: 11px; margin-top: 3px; font-family: 'DM Mono', monospace; }
+.up { color: var(--green); }
+.down { color: var(--red); }
+
+.input-block { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.input-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.input-row label { font-size: 13px; color: var(--muted); flex: 1; }
+.input-row input {
+  width: 100px; padding: 8px 10px; font-size: 14px;
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 8px; color: var(--text); font-family: 'DM Mono', monospace;
+  text-align: right;
+}
+.input-row input:focus { outline: none; border-color: var(--accent); }
+
+.btn-save {
+  width: 100%; padding: 14px; font-size: 15px; font-weight: 600;
+  background: var(--green-dim); border: 1px solid rgba(34,197,94,0.3);
+  border-radius: 12px; color: var(--green); cursor: pointer;
+  font-family: 'DM Sans', sans-serif; transition: all .15s;
+  margin-bottom: 24px;
+}
+.btn-save:active { transform: scale(0.98); background: rgba(34,197,94,0.2); }
+
+.compare-section { margin-bottom: 24px; }
+.compare-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+}
+.compare-row:last-child { border-bottom: none; }
+.compare-label { font-size: 13px; color: var(--muted); }
+.compare-vals { display: flex; align-items: center; gap: 12px; }
+.compare-curr { font-size: 15px; font-weight: 600; font-family: 'DM Mono', monospace; }
+.compare-diff { font-size: 12px; font-family: 'DM Mono', monospace; }
+
+.divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+.nav-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--bg); border-top: 1px solid var(--border);
+  display: flex; padding: 8px 0 env(safe-area-inset-bottom, 8px);
+}
+.nav-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 6px 0; cursor: pointer; color: var(--muted); font-size: 10px;
+  font-weight: 500; letter-spacing: .03em; background: none; border: none;
+}
+.nav-item.active { color: var(--accent); }
+.nav-icon { font-size: 20px; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">FCC / SCOREBOARD</div>
+  <div class="streak-pill">🔥 <span id="streak-num">0</span> day streak</div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('today')">Today</button>
+  <button class="tab" onclick="switchTab('week')">Week</button>
+  <button class="tab" onclick="switchTab('numbers')">Numbers</button>
+</div>
+
+<div id="panel-today" class="panel active">
+  <div class="win-card" id="win-card">
+    <div class="win-title" id="win-title">Let's get to work.</div>
+    <div class="win-sub" id="win-sub" style="margin-top:6px">Complete all 3 to win today</div>
+  </div>
+
+  <div class="section-label">Today's non-negotiables</div>
+  <div class="tasks">
+    <div class="task" id="t0" onclick="toggle(0)">
+      <div class="check" id="c0">✓</div>
+      <div class="task-text">Ask for a referral (in person or text)</div>
+    </div>
+    <div class="task" id="t1" onclick="toggle(1)">
+      <div class="check" id="c1">✓</div>
+      <div class="task-text">One proactive outreach — follow-up, past customer, or Sales Desk</div>
+    </div>
+    <div class="task" id="t2" onclick="toggle(2)">
+      <div class="check" id="c2">✓</div>
+      <div class="task-text">Check your numbers — leads, estimates, jobs (5 min)</div>
+    </div>
+  </div>
+
+  <div class="section-label">Last 7 days</div>
+  <div class="day-strip" id="day-strip"></div>
+
+  <div class="quote-card">
+    <div class="quote-text" id="quote"></div>
+  </div>
+</div>
+
+<div id="panel-week" class="panel">
+  <div class="section-label">This week vs last week</div>
+  <div class="compare-section" id="compare-rows"></div>
+
+  <div class="divider"></div>
+  <div class="section-label">Update this week</div>
+  <div class="input-block" id="week-inputs"></div>
+  <button class="btn-save" onclick="saveWeek()">Save this week</button>
+</div>
+
+<div id="panel-numbers" class="panel">
+  <div class="section-label">2026 YTD vs plan</div>
+  <div class="grid2" id="ytd-cards"></div>
+
+  <div class="divider"></div>
+  <div class="section-label">Update YTD numbers</div>
+  <div class="input-block" id="ytd-inputs"></div>
+  <button class="btn-save" onclick="saveYTD()">Save YTD numbers</button>
+</div>
+
+<script>
+const KEY = 'fcc_v2';
+const TODAY = new Date().toISOString().slice(0,10);
+
+const QUOTES = [
+  '<strong>68% close rate.</strong> When leads show up, you win. Go get them.',
+  '<strong>81 jobs completed.</strong> Every single one of those customers can send you another. Go ask.',
+  'You built a 27-email reactivation campaign in <strong>3 hours on a Sunday morning.</strong> You\'re the engine.',
+  '<strong>$500k is 171 jobs.</strong> You have 81. That\'s less than 3 per week. You can do this.',
+  'Your close rate is <strong>68%.</strong> The industry average is 50%. That\'s not luck — that\'s Joe Martinta.',
+  'Every lead without follow-up is <strong>$2,150 walking out the door.</strong> Follow up.',
+  '<strong>Failure is not an option.</strong> You said it. Mean it today.',
+  'Pedro\'s gone. The agency\'s gone. <strong>You\'re running this now.</strong> And you\'re doing it better.',
+  'The fire didn\'t go out. <strong>It just got focused.</strong>'
+];
+
+function load() {
+  try { return JSON.parse(localStorage.getItem(KEY)) || def(); } catch(e) { return def(); }
+}
+function def() {
+  return {
+    tasks: [false,false,false], taskDate: '',
+    streak: 0, lastWon: '',
+    wonDays: [],
+    week: {leads:0,estimates:0,jobs:0,revenue:0,reviews:0},
+    lastWeek: {leads:0,estimates:0,jobs:0,revenue:0,reviews:0},
+    ytd: {leads:144,estimates:105,jobs:81,revenue:237000,reviews:59}
+  };
+}
+function save(s) { localStorage.setItem(KEY, JSON.stringify(s)); }
+
+let S = load();
+
+if (S.taskDate !== TODAY) {
+  const yest = new Date(Date.now()-86400000).toISOString().slice(0,10);
+  if (S.lastWon !== yest && S.taskDate) S.streak = 0;
+  S.tasks = [false,false,false];
+  S.taskDate = TODAY;
+  save(S);
+}
+
+document.getElementById('streak-num').textContent = S.streak;
+
+const qIdx = Math.floor(Math.random() * QUOTES.length);
+document.getElementById('quote').innerHTML = '"' + QUOTES[qIdx] + '"';
+
+function toggle(i) {
+  S.tasks[i] = !S.tasks[i];
+  const t = document.getElementById('t'+i);
+  const c = document.getElementById('c'+i);
+  if (S.tasks[i]) { t.classList.add('done'); c.style.background = 'var(--green)'; c.style.borderColor = 'var(--green)'; }
+  else { t.classList.remove('done'); c.style.background = ''; c.style.borderColor = ''; }
+  const done = S.tasks.filter(Boolean).length;
+  const card = document.getElementById('win-card');
+  const title = document.getElementById('win-title');
+  const sub = document.getElementById('win-sub');
+  if (done === 3) {
+    card.classList.add('won');
+    title.textContent = 'You won today.';
+    sub.textContent = 'All 3 done. That\'s the standard. Own it.';
+    if (!S.wonDays.includes(TODAY)) S.wonDays.push(TODAY);
+    S.lastWon = TODAY;
+    S.streak++;
+    document.getElementById('streak-num').textContent = S.streak;
+    document.getElementById('quote').innerHTML = '"That\'s how it\'s done. Streak alive. <strong>Tomorrow, same thing.</strong>"';
+  } else {
+    card.classList.remove('won');
+    title.textContent = done + ' of 3 done';
+    sub.textContent = done === 0 ? 'Complete all 3 to win today' : done === 1 ? '2 left. Keep going.' : '1 more. Finish strong.';
+  }
+  save(S);
+  renderStrip();
+}
+
+function renderStrip() {
+  const strip = document.getElementById('day-strip');
+  strip.innerHTML = '';
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(Date.now() - i*86400000).toISOString().slice(0,10);
+    const pip = document.createElement('div');
+    pip.className = 'day-pip';
+    if (d === TODAY) pip.classList.add('today');
+    else if (S.wonDays.includes(d)) pip.classList.add('won');
+    strip.appendChild(pip);
+  }
+}
+renderStrip();
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    t.classList.toggle('active', ['today','week','numbers'][i] === name);
+  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  if (name === 'week') renderWeek();
+  if (name === 'numbers') renderNumbers();
+}
+
+const WFIELDS = [
+  {k:'leads',l:'Leads received'},
+  {k:'estimates',l:'Estimates run'},
+  {k:'jobs',l:'Jobs closed'},
+  {k:'revenue',l:'Revenue booked ($)'},
+  {k:'reviews',l:'Reviews / referrals asked'}
+];
+
+function renderWeek() {
+  const cr = document.getElementById('compare-rows');
+  cr.innerHTML = '';
+  WFIELDS.forEach(f => {
+    const curr = S.week[f.k]||0;
+    const last = S.lastWeek[f.k]||0;
+    const d = curr - last;
+    const row = document.createElement('div');
+    row.className = 'compare-row';
+    const dStr = (d >= 0 ? '+' : '') + (f.k==='revenue' ? '$'+Math.abs(d).toLocaleString() : Math.abs(d));
+    row.innerHTML = `<span class="compare-label">${f.l}</span><div class="compare-vals"><span class="compare-curr">${f.k==='revenue'?'$'+curr.toLocaleString():curr}</span><span class="compare-diff ${d>=0?'up':'down'}">${dStr}</span></div>`;
+    cr.appendChild(row);
+  });
+  const wi = document.getElementById('week-inputs');
+  wi.innerHTML = '';
+  WFIELDS.forEach(f => {
+    const row = document.createElement('div');
+    row.className = 'input-row';
+    row.innerHTML = `<label>${f.l}</label><input type="number" id="wi-${f.k}" value="${S.week[f.k]||0}">`;
+    wi.appendChild(row);
+  });
+}
+
+function saveWeek() {
+  S.lastWeek = Object.assign({}, S.week);
+  WFIELDS.forEach(f => {
+    const el = document.getElementById('wi-'+f.k);
+    if (el) S.week[f.k] = parseFloat(el.value)||0;
+  });
+  save(S);
+  renderWeek();
+  const btn = document.querySelector('#panel-week .btn-save');
+  btn.textContent = '✓ Saved!';
+  setTimeout(() => btn.textContent = 'Save this week', 1500);
+}
+
+const YFIELDS = [
+  {k:'leads',l:'Leads YTD',goal:211},
+  {k:'estimates',l:'Estimates YTD',goal:156},
+  {k:'jobs',l:'Jobs YTD',goal:143},
+  {k:'revenue',l:'Revenue YTD',goal:500000},
+  {k:'reviews',l:'Google reviews',goal:100}
+];
+
+function renderNumbers() {
+  const grid = document.getElementById('ytd-cards');
+  grid.innerHTML = '';
+  YFIELDS.forEach(f => {
+    const v = S.ytd[f.k]||0;
+    const pct = Math.round((v/f.goal)*100);
+    const d = v - f.goal;
+    const card = document.createElement('div');
+    card.className = 'metric-card';
+    const valStr = f.k==='revenue' ? '$'+v.toLocaleString() : v;
+    const dStr = (d>=0?'+':'') + (f.k==='revenue'?'$'+Math.abs(d).toLocaleString():Math.abs(d));
+    card.innerHTML = `<div class="metric-label">${f.l}</div><div class="metric-val">${valStr}</div><div class="metric-pct">${pct}% of goal</div><div class="metric-delta ${d>=0?'up':'down'}">${dStr} vs plan</div>`;
+    grid.appendChild(card);
+  });
+  const yi = document.getElementById('ytd-inputs');
+  yi.innerHTML = '';
+  YFIELDS.forEach(f => {
+    const row = document.createElement('div');
+    row.className = 'input-row';
+    row.innerHTML = `<label>${f.l}</label><input type="number" id="yi-${f.k}" value="${S.ytd[f.k]||0}">`;
+    yi.appendChild(row);
+  });
+}
+
+function saveYTD() {
+  YFIELDS.forEach(f => {
+    const el = document.getElementById('yi-'+f.k);
+    if (el) S.ytd[f.k] = parseFloat(el.value)||0;
+  });
+  save(S);
+  renderNumbers();
+  const btn = document.querySelector('#panel-numbers .btn-save');
+  btn.textContent = '✓ Saved!';
+  setTimeout(() => btn.textContent = 'Save YTD numbers', 1500);
+}
+
+S.tasks.forEach((done, i) => {
+  if (done) {
+    document.getElementById('t'+i).classList.add('done');
+    document.getElementById('c'+i).style.background = 'var(--green)';
+    document.getElementById('c'+i).style.borderColor = 'var(--green)';
+  }
+});
+const doneCount = S.tasks.filter(Boolean).length;
+if (doneCount > 0 && doneCount < 3) {
+  document.getElementById('win-title').textContent = doneCount + ' of 3 done';
+  document.getElementById('win-sub').textContent = doneCount === 1 ? '2 left. Keep going.' : '1 more. Finish strong.';
+}
+if (doneCount === 3) {
+  document.getElementById('win-card').classList.add('won');
+  document.getElementById('win-title').textContent = 'You won today.';
+  document.getElementById('win-sub').textContent = 'All 3 done. That\'s the standard. Own it.';
+}
+</script>
+</body>
+</html>
