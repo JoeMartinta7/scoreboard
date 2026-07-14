@@ -6,367 +6,155 @@
   <title>Free Estimate — Fresh Coat Painters of Cypress</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --red:    #C8102E;
-      --dark:   #1A1A1A;
-      --mid:    #4A4A4A;
-      --light:  #F7F7F7;
-      --border: #DEDEDE;
-      --white:  #FFFFFF;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      background: #F2F2F2;
-      color: var(--dark);
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ── Header ── */
-    header {
-      background: var(--red);
-      padding: 18px 24px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .brand-name {
-      color: var(--white);
-      font-size: 1rem;
-      font-weight: 700;
-      line-height: 1.3;
-    }
-    .brand-sub {
-      color: rgba(255,255,255,0.78);
-      font-size: 0.78rem;
-    }
-
-    /* ── Main ── */
-    main {
-      flex: 1;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 40px 16px 60px;
-    }
-
-    .card {
-      background: var(--white);
-      border-radius: 10px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.09);
-      padding: 40px 36px;
-      width: 100%;
-      max-width: 520px;
-    }
-
-    .card-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 6px;
-    }
-
-    .card-sub {
-      font-size: 0.92rem;
-      color: var(--mid);
-      margin-bottom: 28px;
-    }
-
-    /* ── Form fields ── */
-    .form-row {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-    label.field-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 5px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
+    :root { --red: #C8102E; --dark: #1A1A1A; --mid: #4A4A4A; --light: #F7F7F7; --border: #DEDEDE; --white: #FFFFFF; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: #F2F2F2; color: var(--dark); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+    header { background: var(--red); padding: 18px 24px; }
+    .brand-name { color: var(--white); font-size: 1rem; font-weight: 700; line-height: 1.3; }
+    .brand-sub { color: rgba(255,255,255,0.78); font-size: 0.78rem; }
+    main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 40px 16px 60px; }
+    .card { background: var(--white); border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.09); padding: 40px 36px; width: 100%; max-width: 520px; }
+    .card-title { font-size: 1.5rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+    .card-sub { font-size: 0.92rem; color: var(--mid); margin-bottom: 28px; }
+    .form-row { display: flex; gap: 14px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; flex: 1; }
+    label.field-label { font-size: 0.8rem; font-weight: 600; color: var(--dark); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
     .required-star { color: var(--red); margin-left: 2px; }
-
-    input[type="text"],
-    input[type="tel"],
-    input[type="email"] {
-      border: 1.5px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 13px;
-      font-size: 0.95rem;
-      color: var(--dark);
-      background: var(--white);
-      transition: border-color 0.15s;
-      width: 100%;
-    }
-    input:focus {
-      outline: none;
-      border-color: var(--red);
-    }
-
-    /* ── Divider ── */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 22px 0;
-    }
-
-    /* ── Consent checkboxes ── */
-    .consent-block {
-      background: var(--light);
-      border-radius: 8px;
-      padding: 16px 18px;
-      margin-bottom: 14px;
-    }
-    .consent-block + .consent-block {
-      margin-bottom: 0;
-    }
-
-    .consent-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .consent-row input[type="checkbox"] {
-      margin-top: 3px;
-      width: 17px;
-      height: 17px;
-      flex-shrink: 0;
-      accent-color: var(--red);
-      cursor: pointer;
-    }
-    .consent-text {
-      font-size: 0.82rem;
-      color: var(--mid);
-      line-height: 1.55;
-    }
-    .consent-text strong {
-      color: var(--dark);
-    }
-    .consent-tag {
-      display: inline-block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: var(--red);
-      color: var(--white);
-      border-radius: 3px;
-      padding: 1px 6px;
-      margin-bottom: 6px;
-    }
-    .consent-tag.optional {
-      background: #777;
-    }
-
-    /* ── Submit button ── */
-    .submit-btn {
-      display: block;
-      width: 100%;
-      background: var(--red);
-      color: var(--white);
-      border: none;
-      border-radius: 7px;
-      padding: 14px;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      margin-top: 22px;
-      transition: background 0.15s;
-    }
+    input[type="text"], input[type="tel"], input[type="email"] { border: 1.5px solid var(--border); border-radius: 6px; padding: 10px 13px; font-size: 0.95rem; color: var(--dark); background: var(--white); width: 100%; }
+    input:focus { outline: none; border-color: var(--red); }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 22px 0; }
+    .sms-notice { font-size: 0.8rem; color: var(--mid); margin-bottom: 14px; padding: 10px 14px; background: var(--light); border-radius: 6px; }
+    .consent-block { background: var(--light); border-radius: 8px; padding: 16px 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+    .consent-row { display: flex; align-items: flex-start; gap: 12px; }
+    .consent-row input[type="checkbox"] { margin-top: 3px; width: 17px; height: 17px; flex-shrink: 0; accent-color: var(--red); cursor: pointer; }
+    .consent-text { font-size: 0.83rem; color: var(--mid); line-height: 1.6; }
+    .consent-text strong { color: var(--dark); }
+    .consent-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: var(--red); color: var(--white); border-radius: 3px; padding: 1px 6px; margin-bottom: 8px; }
+    .consent-tag.optional { background: #777; }
+    .submit-btn { display: block; width: 100%; background: var(--red); color: var(--white); border: none; border-radius: 7px; padding: 14px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 22px; }
     .submit-btn:hover { background: #a80d25; }
-
-    /* ── Policy links ── */
-    .policy-links {
-      text-align: center;
-      margin-top: 16px;
-      font-size: 0.8rem;
-      color: #999;
-    }
-    .policy-links a {
-      color: var(--red);
-      text-decoration: none;
-    }
-    .policy-links a:hover { text-decoration: underline; }
-
-    /* ── Trust bar ── */
-    .trust-bar {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin-top: 28px;
-      padding-top: 22px;
-      border-top: 1px solid var(--border);
-    }
-    .trust-item {
-      font-size: 0.78rem;
-      color: var(--mid);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .trust-item::before {
-      content: "✓";
-      color: var(--red);
-      font-weight: 700;
-    }
-
-    /* ── Success message ── */
-    #success-msg {
-      display: none;
-      text-align: center;
-      padding: 32px 0 10px;
-    }
-    #success-msg .check {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-    #success-msg h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 8px;
-    }
-    #success-msg p {
-      font-size: 0.92rem;
-      color: var(--mid);
-    }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center;
-      padding: 18px;
-      font-size: 0.75rem;
-      color: #aaa;
-      border-top: 1px solid var(--border);
-      background: var(--white);
-    }
-
-    @media (max-width: 480px) {
-      .card { padding: 28px 18px; }
-      .form-row { flex-direction: column; gap: 0; }
-      .form-row .form-group { margin-bottom: 16px; }
-    }
+    .policy-box { background: var(--light); border: 1px solid var(--border); border-radius: 6px; padding: 14px 18px; margin-top: 16px; text-align: center; }
+    .policy-box p { font-size: 0.8rem; color: var(--mid); margin-bottom: 8px; }
+    .policy-links { display: flex; justify-content: center; gap: 6px; align-items: center; }
+    .policy-links a { color: var(--red); text-decoration: underline; font-weight: 600; font-size: 0.88rem; }
+    .policy-links span { color: var(--mid); font-size: 0.88rem; }
+    .trust-bar { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .trust-item { font-size: 0.78rem; color: var(--mid); display: flex; align-items: center; gap: 5px; }
+    .trust-item::before { content: "✓"; color: var(--red); font-weight: 700; }
+    #success-msg { display: none; text-align: center; padding: 32px 0 10px; }
+    #success-msg .check { font-size: 3rem; margin-bottom: 10px; }
+    #success-msg h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+    #success-msg p { font-size: 0.92rem; color: var(--mid); }
+    footer { text-align: center; padding: 18px; font-size: 0.75rem; color: #aaa; border-top: 1px solid var(--border); background: var(--white); }
+    footer a { color: #aaa; }
+    @media (max-width: 480px) { .card { padding: 28px 18px; } .form-row { flex-direction: column; gap: 0; } .form-row .form-group { margin-bottom: 16px; } }
   </style>
 </head>
 <body>
 
-  <header>
-    <div>
-      <div class="brand-name">Fresh Coat Painters of Cypress</div>
-      <div class="brand-sub">D&amp;JM Multiservices LLC &nbsp;·&nbsp; Licensed &amp; Insured &nbsp;·&nbsp; Sherwin-Williams Platinum Certified</div>
-    </div>
-  </header>
+<header>
+  <div class="brand-name">Fresh Coat Painters of Cypress</div>
+  <div class="brand-sub">D&amp;JM Multiservices LLC &nbsp;·&nbsp; Licensed &amp; Insured &nbsp;·&nbsp; Sherwin-Williams Platinum Certified</div>
+</header>
 
-  <main>
-    <div class="card">
+<main>
+  <div class="card">
+    <div id="form-section">
+      <div class="card-title">Request Your Free Estimate</div>
+      <div class="card-sub">A member of our team will reach out within the hour to confirm your appointment.</div>
 
-      <div id="form-section">
-        <div class="card-title">Request Your Free Estimate</div>
-        <div class="card-sub">A member of our team will reach out within the hour to confirm your appointment.</div>
+      <form id="optin-form" onsubmit="handleSubmit(event)">
 
-        <form id="optin-form" onsubmit="handleSubmit(event)">
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="field-label" for="fname">First Name <span class="required-star">*</span></label>
-              <input type="text" id="fname" name="first_name" placeholder="Joe" required />
-            </div>
-            <div class="form-group">
-              <label class="field-label" for="lname">Last Name <span class="required-star">*</span></label>
-              <input type="text" id="lname" name="last_name" placeholder="Smith" required />
-            </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="field-label" for="fname">First Name <span class="required-star">*</span></label>
+            <input type="text" id="fname" name="first_name" placeholder="Joe" required />
           </div>
-
-          <div class="form-group" style="margin-bottom:16px;">
-            <label class="field-label" for="phone">Phone Number <span class="required-star">*</span></label>
-            <input type="tel" id="phone" name="phone" placeholder="(346) 555-0100" required />
+          <div class="form-group">
+            <label class="field-label" for="lname">Last Name <span class="required-star">*</span></label>
+            <input type="text" id="lname" name="last_name" placeholder="Smith" required />
           </div>
+        </div>
 
-          <div class="form-group" style="margin-bottom:16px;">
-            <label class="field-label" for="email">Email Address <span class="required-star">*</span></label>
-            <input type="email" id="email" name="email" placeholder="you@email.com" required />
+        <div class="form-group" style="margin-bottom:16px;">
+          <label class="field-label" for="phone">Phone Number <span class="required-star">*</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="(346) 555-0100" required />
+        </div>
+
+        <div class="form-group" style="margin-bottom:16px;">
+          <label class="field-label" for="email">Email Address <span class="required-star">*</span></label>
+          <input type="email" id="email" name="email" placeholder="you@email.com" required />
+        </div>
+
+        <hr class="divider" />
+
+        <div class="sms-notice">Entering a phone number does not grant permission to send SMS messages. SMS consent must be collected explicitly using the checkboxes below.</div>
+
+        <!-- Transactional Checkbox — cannot be required -->
+        <div class="consent-block">
+          <div class="consent-tag">Appointments &amp; Project Updates</div>
+          <div class="consent-row">
+            <input type="checkbox" id="consent-transactional" name="consent_transactional" />
+            <label class="consent-text" for="consent-transactional">
+              I consent to receive transactional SMS messages from <strong>Fresh Coat Painters of Cypress (D&amp;JM Multiservices LLC)</strong> at the phone number provided. This includes appointment confirmations, estimate follow-ups, and project updates. Message frequency may vary. Message &amp; data rates may apply. Reply <strong>HELP</strong> for help or text <strong>STOP</strong> to opt-out at any time.
+            </label>
           </div>
+        </div>
 
-          <hr class="divider" />
-
-          <!-- Transactional Checkbox -->
-          <div class="consent-block">
-            <div class="consent-tag">Appointment & Project Updates</div>
-            <div class="consent-row">
-              <input type="checkbox" id="consent-transactional" name="consent_transactional" />
-              <label class="consent-text" for="consent-transactional">
-                I consent to receive transactional messages from <strong>Fresh Coat Painters of Cypress</strong> at the phone number provided. This includes appointment confirmations, estimate follow-ups, and project updates. Message frequency may vary. Message &amp; data rates may apply. Reply <strong>HELP</strong> for help or <strong>STOP</strong> to opt-out.
-              </label>
-            </div>
+        <!-- Marketing Checkbox — must be unchecked, optional -->
+        <div class="consent-block">
+          <div class="consent-tag optional">Optional — Promotions &amp; Offers</div>
+          <div class="consent-row">
+            <input type="checkbox" id="consent-marketing" name="consent_marketing" />
+            <label class="consent-text" for="consent-marketing">
+              I consent to receive marketing and promotional SMS messages from <strong>Fresh Coat Painters of Cypress (D&amp;JM Multiservices LLC)</strong> at the phone number provided. This includes seasonal offers, special promotions, and returning customer messages. Message frequency may vary. Message &amp; data rates may apply. Reply <strong>HELP</strong> for help or text <strong>STOP</strong> to opt-out at any time.
+            </label>
           </div>
+        </div>
 
-          <br/>
+        <button type="submit" class="submit-btn">Request My Free Estimate →</button>
 
-          <!-- Marketing Checkbox -->
-          <div class="consent-block">
-            <div class="consent-tag optional">Optional — Promotions &amp; Offers</div>
-            <div class="consent-row">
-              <input type="checkbox" id="consent-marketing" name="consent_marketing" />
-              <label class="consent-text" for="consent-marketing">
-                I consent to receive marketing and promotional messages from <strong>Fresh Coat Painters of Cypress</strong> at the phone number provided. This includes seasonal offers, special promotions, and reactivation messages. Message frequency may vary. Message &amp; data rates may apply. Reply <strong>HELP</strong> for help or <strong>STOP</strong> to opt-out.
-              </label>
-            </div>
-          </div>
-
-          <button type="submit" class="submit-btn">Request My Free Estimate →</button>
-
+        <div class="policy-box">
+          <p>By submitting this form you acknowledge our</p>
           <div class="policy-links">
-            <a href="https://joemartinta7.github.io/scoreboard/sms-terms.html" target="_blank">Privacy Policy</a>
-            &nbsp;|&nbsp;
+            <a href="https://joemartinta7.github.io/scoreboard/privacy-policy.html" target="_blank">Privacy Policy</a>
+            <span>|</span>
             <a href="https://joemartinta7.github.io/scoreboard/sms-terms.html" target="_blank">Terms of Service</a>
           </div>
-
-        </form>
-
-        <div class="trust-bar">
-          <span class="trust-item">20 Years Experience</span>
-          <span class="trust-item">Sherwin-Williams Platinum Certified</span>
-          <span class="trust-item">Licensed &amp; Insured</span>
-          <span class="trust-item">No obligation estimate</span>
         </div>
-      </div>
 
-      <!-- Success State -->
-      <div id="success-msg">
-        <div class="check">✅</div>
-        <h2>You're all set!</h2>
-        <p>We received your request and will be in touch shortly to confirm your free estimate.<br><br>
-        Questions? Call or text us at <strong>(346) 660-2404</strong>.</p>
-      </div>
+      </form>
 
+      <div class="trust-bar">
+        <span class="trust-item">20 Years Experience</span>
+        <span class="trust-item">SW Platinum Certified</span>
+        <span class="trust-item">Licensed &amp; Insured</span>
+        <span class="trust-item">No obligation</span>
+      </div>
     </div>
-  </main>
 
-  <footer>
-    &copy; 2026 D&amp;JM Multiservices LLC &nbsp;·&nbsp; Fresh Coat Painters of Cypress &nbsp;·&nbsp; 18223 Grove Brook Lane, Cypress, TX 77429
-    &nbsp;·&nbsp; <a href="https://joemartinta7.github.io/scoreboard/sms-terms.html" style="color:#aaa;">SMS Terms &amp; Privacy</a>
-  </footer>
+    <div id="success-msg">
+      <div class="check">✅</div>
+      <h2>You're all set!</h2>
+      <p>We received your request and will be in touch shortly to confirm your free estimate.<br><br>
+      Questions? Call or text us at <strong>(346) 660-2404</strong>.</p>
+    </div>
+  </div>
+</main>
 
-  <script>
-    function handleSubmit(e) {
-      e.preventDefault();
-      document.getElementById('form-section').style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
-    }
-  </script>
+<footer>
+  &copy; 2026 D&amp;JM Multiservices LLC &nbsp;·&nbsp; Fresh Coat Painters of Cypress &nbsp;·&nbsp; 18223 Grove Brook Lane, Cypress, TX 77429
+  &nbsp;·&nbsp;
+  <a href="https://joemartinta7.github.io/scoreboard/privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp;
+  <a href="https://joemartinta7.github.io/scoreboard/sms-terms.html">Terms of Service</a>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-section').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  }
+</script>
 
 </body>
 </html>
