@@ -3,293 +3,148 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SMS Terms & Privacy — Fresh Coat Painters of Cypress</title>
+  <title>SMS Terms of Service — Fresh Coat Painters of Cypress</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --red:    #C8102E;
-      --dark:   #1A1A1A;
-      --mid:    #4A4A4A;
-      --light:  #F7F7F7;
-      --border: #E0E0E0;
-      --white:  #FFFFFF;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      background: var(--white);
-      color: var(--dark);
-      line-height: 1.7;
-    }
-
-    /* ── Header ── */
-    header {
-      background: var(--red);
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .logo-mark {
-      width: 40px;
-      height: 40px;
-      background: var(--white);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .logo-mark svg { width: 26px; height: 26px; }
-    .brand-name {
-      color: var(--white);
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      line-height: 1.3;
-    }
-    .brand-sub {
-      color: rgba(255,255,255,0.75);
-      font-size: 0.78rem;
-      font-weight: 400;
-    }
-
-    /* ── Layout ── */
-    main {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-    }
-
-    /* ── Page title ── */
-    .page-title {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 6px;
-      line-height: 1.2;
-    }
-    .page-sub {
-      font-size: 0.9rem;
-      color: var(--mid);
-      margin-bottom: 40px;
-    }
-
-    /* ── Sections ── */
-    section {
-      border-top: 1px solid var(--border);
-      padding: 28px 0;
-    }
+    :root { --red: #C8102E; --dark: #1A1A1A; --mid: #4A4A4A; --light: #F7F7F7; --border: #E0E0E0; --white: #FFFFFF; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--white); color: var(--dark); line-height: 1.7; }
+    header { background: var(--red); padding: 20px 24px; }
+    .brand-name { color: var(--white); font-size: 1rem; font-weight: 600; line-height: 1.3; }
+    .brand-sub { color: rgba(255,255,255,0.75); font-size: 0.78rem; }
+    main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+    .page-title { font-size: 1.7rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+    .page-sub { font-size: 0.9rem; color: var(--mid); margin-bottom: 40px; }
+    section { border-top: 1px solid var(--border); padding: 28px 0; }
     section:last-child { border-bottom: 1px solid var(--border); }
-
-    .section-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 0.95rem;
-      color: var(--mid);
-      margin-bottom: 10px;
-    }
+    .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+    h2 { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+    p { font-size: 0.95rem; color: var(--mid); margin-bottom: 10px; }
     p:last-child { margin-bottom: 0; }
-
-    ul {
-      margin: 10px 0 10px 20px;
-      font-size: 0.95rem;
-      color: var(--mid);
-    }
+    ul { margin: 10px 0 10px 20px; font-size: 0.95rem; color: var(--mid); }
     ul li { margin-bottom: 6px; }
-
-    /* ── Highlight box ── */
-    .highlight {
-      background: var(--light);
-      border-left: 3px solid var(--red);
-      padding: 16px 20px;
-      border-radius: 0 6px 6px 0;
-      margin-top: 14px;
-    }
-    .highlight p {
-      font-size: 0.9rem;
-      margin-bottom: 8px;
-    }
+    .highlight { background: var(--light); border-left: 3px solid var(--red); padding: 16px 20px; border-radius: 0 6px 6px 0; margin-top: 14px; }
+    .highlight p { font-size: 0.9rem; margin-bottom: 8px; }
     .highlight p:last-child { margin-bottom: 0; }
-
-    /* ── Contact row ── */
-    .contact-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 14px;
-    }
-    .contact-item {
-      background: var(--light);
-      border-radius: 6px;
-      padding: 12px 18px;
-      font-size: 0.88rem;
-      color: var(--dark);
-    }
-    .contact-item span {
-      display: block;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--mid);
-      margin-bottom: 3px;
-    }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center;
-      padding: 24px;
-      font-size: 0.78rem;
-      color: #999;
-      border-top: 1px solid var(--border);
-    }
-
-    @media (max-width: 480px) {
-      .page-title { font-size: 1.35rem; }
-      main { padding: 32px 16px 60px; }
-    }
+    .stop-box { background: #fff5f5; border: 2px solid var(--red); border-radius: 8px; padding: 20px 24px; margin-top: 14px; text-align: center; }
+    .stop-box .stop-word { font-size: 2rem; font-weight: 900; color: var(--red); letter-spacing: 0.1em; }
+    .stop-box p { font-size: 0.88rem; margin-top: 8px; }
+    .contact-row { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px; }
+    .contact-item { background: var(--light); border-radius: 6px; padding: 12px 18px; font-size: 0.88rem; color: var(--dark); }
+    .contact-item span { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid); margin-bottom: 3px; }
+    a { color: var(--red); }
+    footer { text-align: center; padding: 24px; font-size: 0.78rem; color: #999; border-top: 1px solid var(--border); }
+    @media (max-width: 480px) { .page-title { font-size: 1.35rem; } main { padding: 32px 16px 60px; } }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo-mark">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="3" y="4" width="14" height="7" rx="2" fill="#C8102E"/>
-        <rect x="5" y="6" width="10" height="3" rx="1" fill="white"/>
-        <rect x="15" y="7" width="2" height="2" rx="0.5" fill="#C8102E"/>
-        <rect x="16" y="8" width="1" height="7" rx="0.5" fill="#C8102E"/>
-        <rect x="14" y="14" width="5" height="5" rx="1" fill="#C8102E"/>
-      </svg>
+<header>
+  <div class="brand-name">Fresh Coat Painters of Cypress</div>
+  <div class="brand-sub">D&amp;JM Multiservices LLC</div>
+</header>
+
+<main>
+  <div class="page-title">SMS Terms of Service</div>
+  <p class="page-sub">Last updated: July 2026 &nbsp;·&nbsp; Fresh Coat Painters of Cypress (D&amp;JM Multiservices LLC)<br>
+  18223 Grove Brook Lane, Cypress, TX 77429 &nbsp;·&nbsp; (346) 660-2404 &nbsp;·&nbsp; jmartinta@freshcoatpainters.com</p>
+
+  <section>
+    <div class="section-label">SMS Program</div>
+    <h2>Description of SMS Program &amp; Messaging Use Cases</h2>
+    <p>Fresh Coat Painters of Cypress (D&amp;JM Multiservices LLC) operates an SMS messaging program to communicate with customers and opted-in prospective customers. This SMS program is operated under the brand name <strong>Fresh Coat Painters of Cypress</strong> by the legal entity <strong>D&amp;JM Multiservices LLC</strong>.</p>
+    <p>This SMS program covers the following messaging use cases:</p>
+    <ul>
+      <li><strong>Appointment Confirmations</strong> — Transactional SMS confirming free estimate appointments and consultations</li>
+      <li><strong>Appointment Reminders</strong> — Reminder messages sent before a scheduled visit</li>
+      <li><strong>Estimate Follow-Ups</strong> — Follow-up messages related to a submitted estimate or delivered proposal</li>
+      <li><strong>Promotional &amp; Marketing Messages</strong> — Seasonal offers, discounts, and service announcements (marketing opt-in required)</li>
+      <li><strong>Customer Reactivation</strong> — Outreach to past customers regarding new services or returning customer offers (marketing opt-in required)</li>
+      <li><strong>Project Updates</strong> — Transactional updates related to an active or scheduled painting project</li>
+    </ul>
+    <p>Message frequency varies — typically 1 to 5 messages per inquiry or campaign. Messages are sent during business hours only (8 AM – 8 PM local time, Monday through Saturday).</p>
+  </section>
+
+  <section>
+    <div class="section-label">Eligibility</div>
+    <h2>Age Restriction — 18 Years or Older Required</h2>
+    <p>This SMS program is intended for individuals who are <strong>18 years of age or older (18+)</strong>. By opting in to receive SMS messages from Fresh Coat Painters of Cypress, you confirm that you are at least 18 years old. We do not knowingly send SMS messages to individuals under the age of 18. If we become aware that a recipient is under 18, they will be immediately removed from all SMS communications.</p>
+  </section>
+
+  <section>
+    <div class="section-label">Opt-Out Instructions</div>
+    <h2>How to Stop Messages — Text STOP</h2>
+    <div class="stop-box">
+      <div class="stop-word">STOP</div>
+      <p>Text <strong>STOP</strong> to any message from Fresh Coat Painters of Cypress to immediately unsubscribe and stop all SMS messages.</p>
     </div>
-    <div>
-      <div class="brand-name">Fresh Coat Painters of Cypress</div>
-      <div class="brand-sub">D&amp;JM Multiservices LLC</div>
+    <p style="margin-top:16px;">After texting STOP, you will receive one final confirmation message and no further messages will be sent to your number. Your opt-out request is processed immediately and permanently.</p>
+    <p>Additional opt-out keywords accepted: <strong>CANCEL</strong>, <strong>END</strong>, <strong>QUIT</strong>, <strong>UNSUBSCRIBE</strong>.</p>
+    <p>To re-subscribe after opting out, text <strong>START</strong> to any previous number you received a message from.</p>
+    <p>You may also opt out by contacting us directly at <strong>(346) 660-2404</strong> or <strong>jmartinta@freshcoatpainters.com</strong> and requesting removal from SMS communications.</p>
+  </section>
+
+  <section>
+    <div class="section-label">Support</div>
+    <h2>Support &amp; Contact Information</h2>
+    <p>For help with our SMS program, text <strong>HELP</strong> or <strong>INFO</strong> to any message from us and we will reply with our contact information. You can also reach our support team directly at any time:</p>
+    <div class="contact-row">
+      <div class="contact-item"><span>Phone / Text</span>(346) 660-2404</div>
+      <div class="contact-item"><span>Email</span>jmartinta@freshcoatpainters.com</div>
+      <div class="contact-item"><span>Website</span>freshcoatpainters.com/locations/cypress/</div>
+      <div class="contact-item"><span>Address</span>18223 Grove Brook Lane, Cypress, TX 77429</div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <div class="page-title">SMS Terms &amp; Privacy Policy</div>
-    <p class="page-sub">Last updated: July 2026 &nbsp;·&nbsp; Applies to SMS communications from Fresh Coat Painters of Cypress</p>
+  <section>
+    <div class="section-label">Rates</div>
+    <h2>Message &amp; Data Rates Disclosure</h2>
+    <p><strong>Message and data rates may apply.</strong> The cost of sending and receiving SMS messages through this program depends on your individual mobile carrier plan and wireless service agreement. Standard messaging and data rates set by your carrier will apply to all messages sent and received.</p>
+    <p>Fresh Coat Painters of Cypress (D&amp;JM Multiservices LLC) does not charge any additional fees for SMS communications. Any charges you incur are assessed solely by your mobile carrier based on your plan terms.</p>
+    <p>If you are unsure about your carrier's messaging or data rates, contact your mobile carrier directly before opting in to this program.</p>
+  </section>
 
-    <section>
-      <div class="section-label">Program</div>
-      <h2>About This SMS Program</h2>
-      <p>Fresh Coat Painters of Cypress (operated by D&amp;JM Multiservices LLC, 18223 Grove Brook Lane, Cypress, TX 77429) operates an SMS messaging program to communicate with customers and prospective customers regarding painting services.</p>
-      <p>This program covers the following messaging use cases:</p>
-      <ul>
-        <li><strong>Estimate &amp; Appointment Confirmations</strong> — Confirming scheduled free estimates and consultations</li>
-        <li><strong>Appointment Reminders</strong> — Reminder messages sent prior to a scheduled visit</li>
-        <li><strong>Estimate Follow-Ups</strong> — Follow-up communications related to a submitted estimate request or proposal</li>
-        <li><strong>Promotional Offers</strong> — Occasional promotional messages about services, seasonal specials, or discounts available to opted-in contacts</li>
-        <li><strong>Customer Reactivation</strong> — Outreach to past customers regarding new services, project opportunities, or returning customer offers</li>
-        <li><strong>Project Updates</strong> — Transactional updates related to an active or upcoming painting project</li>
-      </ul>
-      <p>Messages are sent from numbers operated by Fresh Coat Painters of Cypress (D&amp;JM Multiservices LLC).</p>
-    </section>
+  <section>
+    <div class="section-label">Carrier Disclaimer</div>
+    <h2>Carrier Liability Disclaimer</h2>
+    <p>Mobile carriers — including but not limited to AT&amp;T, Verizon, T-Mobile, and other participating carriers — are not liable for delayed or undelivered messages. Message delivery is subject to your carrier's network availability, geographic coverage area, and applicable terms of service.</p>
+    <p>Fresh Coat Painters of Cypress (D&amp;JM Multiservices LLC) is not responsible for any delays, failures, or errors in message delivery caused by carrier network issues, device compatibility, or factors outside our direct control. Carriers reserve the right to terminate or modify SMS messaging programs at any time.</p>
+  </section>
 
-    <section>
-      <div class="section-label">Eligibility</div>
-      <h2>Age Requirement</h2>
-      <p>This SMS program is intended for individuals who are <strong>18 years of age or older</strong>. By opting in to receive SMS messages from Fresh Coat Painters of Cypress, you confirm that you are at least 18 years old. We do not knowingly send marketing or promotional SMS messages to individuals under the age of 18.</p>
-    </section>
+  <section>
+    <div class="section-label">Privacy Policy</div>
+    <h2>Links to Privacy Policy</h2>
+    <p>Your privacy is important to us. Our full Privacy Policy — including how we collect, use, store, and protect your personal information and SMS opt-in data — is available at the link below:</p>
+    <p style="margin-top:12px;"><strong><a href="https://joemartinta7.github.io/scoreboard/privacy-policy.html">→ View Full Privacy Policy</a></strong></p>
+    <p style="margin-top:12px;">Key privacy commitments:</p>
+    <ul>
+      <li>Mobile phone numbers and SMS opt-in consent are never shared with or sold to third parties for marketing purposes</li>
+      <li>Your data is used only to communicate with you about services you requested or opted in to receive</li>
+      <li>You may request access, correction, or deletion of your data at any time</li>
+      <li>Opt-out requests are processed immediately and permanently</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes under any circumstances.</strong></p>
+    </div>
+  </section>
 
-    <section>
-      <div class="section-label">Consent</div>
-      <h2>How You Opt In</h2>
-      <p>You consent to receive SMS messages from Fresh Coat Painters of Cypress when you submit a lead generation form — including forms on our website, Facebook page, or Instagram page — requesting a free painting estimate or other service inquiry. By submitting your phone number through any of these forms, you are explicitly agreeing to receive SMS communications from us.</p>
-      <p>No messages are sent before you submit a form. Consent is not a condition of purchasing any service.</p>
-      <div class="highlight">
-        <p>The opt-in form includes the following disclosure:</p>
-        <p><em>"By submitting this form, you agree to receive SMS messages from Fresh Coat Painters of Cypress at the phone number provided. Messages may include appointment confirmations, estimate follow-ups, promotional offers, and customer updates. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out. Reply HELP for help."</em></p>
-      </div>
-    </section>
+  <section>
+    <div class="section-label">Contact</div>
+    <h2>Questions</h2>
+    <p>For questions about these SMS Terms of Service:</p>
+    <p>Fresh Coat Painters of Cypress &nbsp;·&nbsp; D&amp;JM Multiservices LLC<br>
+    18223 Grove Brook Lane, Cypress, TX 77429<br>
+    Phone: (346) 660-2404 &nbsp;·&nbsp; Email: jmartinta@freshcoatpainters.com</p>
+    <p style="margin-top:12px;">
+      <a href="https://joemartinta7.github.io/scoreboard/privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp;
+      <a href="https://joemartinta7.github.io/scoreboard/sms-opt-in.html">SMS Opt-In Form</a>
+    </p>
+  </section>
 
-    <section>
-      <div class="section-label">Messages</div>
-      <h2>What We Send</h2>
-      <p>Depending on your relationship with us, you may receive the following types of messages:</p>
-      <ul>
-        <li>A booking confirmation with a link to schedule your consultation</li>
-        <li>Appointment reminders prior to your scheduled visit</li>
-        <li>Follow-up communications related to your estimate or project</li>
-        <li>Promotional offers and seasonal specials for opted-in contacts</li>
-        <li>Customer reactivation messages for past customers</li>
-        <li>Project updates and transactional notifications</li>
-      </ul>
-      <p>Message frequency varies based on your inquiry and customer status — typically 1 to 5 messages per conversation or campaign. Messages are sent during business hours only (8 AM – 8 PM local time).</p>
-    </section>
+</main>
 
-    <section>
-      <div class="section-label">Opt-Out</div>
-      <h2>How to Stop Messages</h2>
-      <p>Reply <strong>STOP</strong> at any time to unsubscribe. You will receive one final confirmation and no further messages will be sent.</p>
-      <p>Other opt-out keywords: CANCEL, END, QUIT, UNSUBSCRIBE.</p>
-      <p>To re-subscribe after opting out, reply <strong>START</strong>.</p>
-    </section>
-
-    <section>
-      <div class="section-label">Help</div>
-      <h2>Getting Assistance</h2>
-      <p>Reply <strong>HELP</strong> or <strong>INFO</strong> to receive contact information. You can also reach us directly:</p>
-      <div class="contact-row">
-        <div class="contact-item"><span>Phone</span>(346) 660-2404</div>
-        <div class="contact-item"><span>Email</span>jmartinta@freshcoatpainters.com</div>
-        <div class="contact-item"><span>Website</span>freshcoatpainters.com/locations/cypress/</div>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-label">Privacy</div>
-      <h2>Data &amp; Privacy</h2>
-      <p>We take your privacy seriously. The following applies specifically to phone numbers and SMS opt-in data collected through this program:</p>
-      <ul>
-        <li>Your mobile phone number and SMS opt-in consent will <strong>never be shared with, sold to, or transferred to any third party or affiliate</strong> for marketing or promotional purposes.</li>
-        <li>Phone numbers are used solely to communicate with you about your estimate request, project communications, and service-related messages you have opted in to receive.</li>
-        <li>We do not use your phone number for any purpose unrelated to the services you requested or opted in to receive.</li>
-        <li>SMS opt-in consent is collected at the point of form submission and stored securely. Opt-out requests are processed immediately.</li>
-        <li>You may request deletion of your contact information at any time by emailing jmartinta@freshcoatpainters.com or replying STOP to any message.</li>
-      </ul>
-      <div class="highlight">
-        <p><strong>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes under any circumstances.</strong></p>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-label">Rates</div>
-      <h2>Carrier Rates</h2>
-      <p>Message and data rates may apply depending on your mobile carrier and plan. Fresh Coat Painters of Cypress is not responsible for any charges incurred by your carrier for receiving SMS messages.</p>
-    </section>
-
-    <section>
-      <div class="section-label">Contact</div>
-      <h2>Questions</h2>
-      <p>For questions about this SMS program or these terms, contact us at <strong>(346) 660-2404</strong> or <strong>jmartinta@freshcoatpainters.com</strong>.</p>
-      <p>Fresh Coat Painters of Cypress<br>
-      D&amp;JM Multiservices LLC<br>
-      18223 Grove Brook Lane, Cypress, TX 77429</p>
-    </section>
-
-  </main>
-
-  <footer>
-    &copy; 2026 D&amp;JM Multiservices LLC · Fresh Coat Painters of Cypress · All rights reserved
-  </footer>
+<footer>
+  &copy; 2026 D&amp;JM Multiservices LLC &nbsp;·&nbsp; Fresh Coat Painters of Cypress &nbsp;·&nbsp; All rights reserved
+</footer>
 
 </body>
 </html>
